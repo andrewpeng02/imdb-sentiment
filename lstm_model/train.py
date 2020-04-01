@@ -25,9 +25,9 @@ from lstm_model.dataset import IMDBDataset
 def main(**kwargs):
     project_path = str(Path(__file__).resolve().parents[1])
     train_dataset = IMDBDataset(project_path + '/data/train.csv', kwargs['seq_length'])
-    train_loader = DataLoader(train_dataset, batch_size=kwargs['batch_size'], shuffle=True, num_workers=kwargs['batch_size'])
+    train_loader = DataLoader(train_dataset, batch_size=kwargs['batch_size'], shuffle=True, num_workers=4)
     valid_dataset = IMDBDataset(project_path + '/data/validation.csv', kwargs['seq_length'])
-    valid_loader = DataLoader(valid_dataset, batch_size=kwargs['batch_size'], shuffle=True, num_workers=kwargs['batch_size'])
+    valid_loader = DataLoader(valid_dataset, batch_size=kwargs['batch_size'], shuffle=True, num_workers=4)
 
     model = IMDBLSTM(kwargs['vocab_size'], kwargs['embed_dim'], kwargs['hidden_dim'], kwargs['num_layers'],
                      kwargs['lstm_dropout'], kwargs['fc_dropout']).to('cuda')
